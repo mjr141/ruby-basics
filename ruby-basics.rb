@@ -9,12 +9,12 @@
 # then convert to chars using .chr
 # then turn back into string using join
 
-def caesar_cipher(input_string, shift_factor)
+def caesar_cipher (input_string, shift_factor)
 
   chars = input_string.chars
-  puts(chars)
+  # puts(chars)
   nums = chars.map { |char| char.ord}
-  puts(nums)
+  # puts(nums)
 
   encNums = nums.map do |num|
     if num.between?(65,90)
@@ -30,4 +30,29 @@ def caesar_cipher(input_string, shift_factor)
   encChars.join
 end
 
-puts(caesar_cipher("What a string!", 5))
+# puts(caesar_cipher("What a string!", 5))
+
+# turn word to lowercase (#downcase)
+# turn word to array (try #split with ' ' delimiter)
+# count num of substrings in array (#count and #include?)
+# if count > 0, add or update hash with key (substring) and count. simple!
+dictionary_example = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
+def substrings (phrase, dictionary)
+  phrase_array = phrase.downcase.split(' ')
+  hash = {}
+
+  dictionary.each do |dic_word|
+    curr_count = phrase_array.count { |phr_word| phr_word.include?(dic_word) }
+    if curr_count > 0
+      hash.store(dic_word, curr_count)
+    end
+  end
+
+  if hash.empty?
+    return nil
+  else
+    return hash
+  end
+end
+
+puts(substrings("below", dictionary_example))
