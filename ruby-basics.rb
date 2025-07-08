@@ -36,6 +36,7 @@ end
 # turn word to array (try #split with ' ' delimiter)
 # count num of substrings in array (#count and #include?)
 # if count > 0, add or update hash with key (substring) and count. simple!
+
 dictionary_example = ["below","down","go","going","horn","how","howdy","it","i","low","own","part","partner","sit"]
 def substrings (phrase, dictionary)
   phrase_array = phrase.downcase.split(' ')
@@ -55,4 +56,28 @@ def substrings (phrase, dictionary)
   end
 end
 
-puts(substrings("below", dictionary_example))
+# puts(substrings("Howdy partner, sit down! How's it going?", dictionary_example))
+
+def stock_picker (prices)
+  days = []
+  profit = nil
+
+  prices.each_with_index do |buy_price, buy_day|
+    remaining = prices.slice((buy_day+1)..)
+    sell_price = remaining.max
+
+    if sell_price != nil
+      sell_day = remaining.index(sell_price) + buy_day + 1
+
+      if (profit == nil) || (sell_price - buy_price) > profit
+        profit = sell_price - buy_price
+        days = [buy_day, sell_day]
+      end
+    end
+  end
+
+  puts("#{days} for a profit of $#{prices[days[1]]} - $#{prices[days[0]]} = $#{profit}")
+  return days
+end
+
+puts(stock_picker([17,3,6,9,15,8,6,1,10]))
