@@ -80,4 +80,28 @@ def stock_picker (prices)
   return days
 end
 
-puts(stock_picker([17,3,6,9,15,8,6,1,10]))
+# puts(stock_picker([17,3,6,1,16,8,6,1,0]))
+
+def bubble_sort (array)
+  # condition for entering the loop
+  swapped = true
+  puts("#{array}")
+
+  while swapped == true
+    # we'll exit the loop if the array is sorted
+    swapped = false
+    array.each_with_index do |element, index|
+      next_element = array[index + 1]
+      if next_element != nil
+        if element > next_element
+          array[index], array[index+1] = array[index+1], array[index]
+          puts("#{array}")
+          swapped = true
+        end
+      end
+    end
+  end
+  return array
+end
+
+puts(bubble_sort([4,3,78,2,0,2]))
